@@ -9,6 +9,7 @@ Created on Thu Dec 20 17:21:49 2018
 import sys
 from urllib.request import urlopen
 from bs4 import BeautifulSoup
+import selenium
 
 
 
@@ -41,11 +42,12 @@ for i in range (259):
     page = urlopen(quote_page)
     soup = BeautifulSoup(page, 'html.parser')
     div = soup.find_all('div',attrs = {'id':'icerik_1000_2'})
-    td = soup.find_all('table')
-    #td = soup.find('td',attrs= {'class':'tdr text-center'})
-    for j in td:
-        print(j)
-
+    kontenjan_page = 'https://yokatlas.yok.gov.tr/content/lisans-dynamic/1000_2'+dataLink[i][6:]
+    pageKontenjan = urlopen(kontenjan_page)
+    soupKontenjan = BeautifulSoup(pageKontenjan, 'html.parser')
+    td = soupKontenjan.find('td',attrs= {'class':'tdr text-center'})
+    name = td.text.strip() 
+    print(name)
     
     
         
